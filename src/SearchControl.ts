@@ -374,12 +374,12 @@ const Control: SearchControl = {
     const { provider } = this.options;
 
     if (query.length) {
-      var results = [];
-      const coords = validateCoords({query});
+      let results = [];
+      const coords = validateCoords(query);
       if (coords) {
         results = coords;
       } else {
-        results = await provider!.search({query});
+        results = await provider!.search({ query });
       }
       results = results.slice(0, this.options.maxSuggestions);
       this.resultList.render(results, this.options.resultFormat);
@@ -392,12 +392,12 @@ const Control: SearchControl = {
     this.resultList.clear();
     const { provider } = this.options;
 
-    var results = [];
+    let results = [];
     const coords = validateCoords(query);
     if (coords) {
-        results = coords;
+      results = coords;
     } else {
-        results = await provider!.search(query);
+      results = await provider!.search(query);
     }
 
     if (results && results.length > 0) {
