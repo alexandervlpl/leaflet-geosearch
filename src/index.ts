@@ -9,6 +9,7 @@ export { default as GeocodeEarthProvider } from './providers/geocodeEarthProvide
 export { default as GoogleProvider } from './providers/googleProvider';
 export { default as LegacyGoogleProvider } from './providers/legacyGoogleProvider';
 export { default as HereProvider } from './providers/hereProvider';
+export { default as PhotonProvider } from './providers/photonProvider';
 export { default as LocationIQProvider } from './providers/locationIQProvider';
 export { default as OpenCageProvider } from './providers/openCageProvider';
 export { default as OpenStreetMapProvider } from './providers/openStreetMapProvider';

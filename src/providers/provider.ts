@@ -20,6 +20,8 @@ export interface ProviderParams {
 
 export interface ProviderOptions {
   params?: ProviderParams;
+  url?: string;
+  map?: object;
 }
 
 export enum RequestType {
