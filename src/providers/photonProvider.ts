@@ -31,6 +31,9 @@ export interface RawResult {
 
 function get_label(props: any): string {
   let s = props.name;
+  if (props.type == "country") {
+    return s;
+  }
   if (s === undefined) {
     // Assuming anything without a name is an address.
     s = `${props.housenumber} ${props.street}`;
