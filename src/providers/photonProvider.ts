@@ -1,6 +1,5 @@
 import AbstractProvider, {
   EndpointArgument,
-  LatLng,
   ParseArgument,
   SearchResult,
   ProviderParams
@@ -12,7 +11,7 @@ export interface RequestResult {
 
 export interface RawResult {
       geometry: {
-        coordinates: LatLng;
+        coordinates: [number, number];
         type: string;
       },
       type: string;
@@ -42,6 +41,16 @@ function get_label(props: any): string {
   return s;
 }
 
+function get_bounds(props: any): any {
+  if ("extent" in props) {
+    return [
+      [props.extent[3], props.extent[2]], // s, w
+      [props.extent[1], props.extent[0]], // n, e
+    ];
+  }
+  return null;
+}
+
 export default class PhotonProvider extends AbstractProvider<
   RequestResult,
   RawResult
@@ -65,13 +74,12 @@ export default class PhotonProvider extends AbstractProvider<
 
   parse(response: ParseArgument<RequestResult>): SearchResult<RawResult>[] {
     return response.data.features
-      //.filter((r) => r.geometry.coordinates !== undefined)
       .map((r) => ({
-        x: r.geometry.coordinates.lng,
-        y: r.geometry.coordinates.lat,
+        x: r.geometry.coordinates[0],
+        y: r.geometry.coordinates[1],
         label: get_label(r.properties),
-        bounds: null,
-        raw: r,
+        bounds: get_bounds(r.properties),
+        raw: r
       }));
   }
 }
