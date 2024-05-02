@@ -30,6 +30,18 @@ export interface RawResult {
       }
 }
 
+function get_label(props: any): string {
+  let s = props.name;
+  for (const prop of ['state', 'county', 'city', 'district']) {
+    if (prop in props) {
+      s += `, ${props[prop]}`;
+      break;
+    }
+  }
+  s += `, ${props.country}`;
+  return s;
+}
+
 export default class PhotonProvider extends AbstractProvider<
   RequestResult,
   RawResult
@@ -57,7 +69,7 @@ export default class PhotonProvider extends AbstractProvider<
       .map((r) => ({
         x: r.geometry.coordinates.lng,
         y: r.geometry.coordinates.lat,
-        label: `${r.properties.name}, ${r.properties.country}`, //FIXME: generate useful label
+        label: get_label(r.properties),
         bounds: null,
         raw: r,
       }));
