@@ -31,6 +31,10 @@ export interface RawResult {
 
 function get_label(props: any): string {
   let s = props.name;
+  if (s === undefined) {
+    // Assuming anything without a name is an address.
+    s = `${props.housenumber} ${props.street}`;
+  }
   for (const prop of ['state', 'county', 'city', 'district']) {
     if (prop in props) {
       s += `, ${props[prop]}`;
