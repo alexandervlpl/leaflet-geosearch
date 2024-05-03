@@ -11,7 +11,7 @@ export function validateCoords(query) {
   if (match) {
     const lat = Number(match[1]);
     const lng = Number(match[2]);
-    if (-90 < lat < 90 && -180 < lng < 180) {
+    if (-90 <= lat <= 90 && -180 <= lng <= 180) {
       return [
         {
           x: lng,
